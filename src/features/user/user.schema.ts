@@ -11,7 +11,6 @@ export const usersTable = mysqlTable("users_table", {
   email: varchar({length: 255}).notNull().unique(),
   password: varchar({length: 255}).notNull()
 });
-export type User = typeof usersTable.$inferSelect;
 
 export const userSearchQueryDTO = z.object({
   id: z.string().transform(toNumber("Id should be a number")),
@@ -19,7 +18,6 @@ export const userSearchQueryDTO = z.object({
   email: z.string(),
   limit: z.string().transform(toNumber("Limit should be a number"))
 }).partial().strict("Invalid query");
-export type UserSearchQueryDTO = z.infer<typeof userSearchQueryDTO>;
 
 export const updateUserDTO = z.object({
   name: z.string().max(25),
@@ -29,11 +27,14 @@ export const updateUserDTO = z.object({
     "Weak password"
   )
 }).partial().strict("Invalid payload");
-export type UpdateUserDTO = z.infer<typeof updateUserDTO>;
 
 export const userIdUrlParamDto = userSearchQueryDTO.pick({id: true});
-export type UserIdUrlParamDto = z.infer<typeof userIdUrlParamDto>;
 
 export const userOutputDTO = createSelectSchema(usersTable).transform(
   ({name, id, email}) => ({name, id, email})
 );
+
+export type User = typeof usersTable.$inferSelect;
+export type UserSearchQueryDTO = z.infer<typeof userSearchQueryDTO>;
+export type UpdateUserDTO = z.infer<typeof updateUserDTO>;
+export type UserIdUrlParamDto = z.infer<typeof userIdUrlParamDto>;
