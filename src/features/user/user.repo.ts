@@ -34,10 +34,18 @@ export const addOne = async (
   await db.insert(usersTable).values(payload);
 };
 
-/* TODO: Should be a transaction (To investigate) */
 export const update = async (
   id: number,
   payload: UpdateUserDTO
-): Promise<void> => {
-  await db.update(usersTable).set(payload).where(eq(usersTable.id, id));
+): Promise<User> => {
+  return db.transaction(async (tx) => {
+    await tx.update(usersTable).set(payload).where(eq(usersTable.id, id));
+
+    return tx
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, id))
+      .limit(1)
+      .then(users => users[0]);
+  });
 };
