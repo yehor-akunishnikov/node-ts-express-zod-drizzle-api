@@ -38,6 +38,7 @@ export default [
       "@stylistic/js/eol-last": ["error"],
       "@stylistic/js/quotes": ["error"],
       "@stylistic/js/max-len": ["error", 130],
+      "@stylistic/js/comma-dangle": ["error", "never"],
     },
   },
   eslint.configs.recommended,
