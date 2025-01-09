@@ -1,14 +1,14 @@
 import {NextFunction, Request, Response} from "express";
 import {StatusCodes} from "http-status-codes";
 
-import {preprocessRequest} from "@common/middlewares";
+import {applyRequestDto} from "@common/middlewares";
 import {HttpError} from "@common/errors";
 
 import {LoginDto, loginDto, RegisterDto, registerDto} from "./auth.schema";
 import * as authService from "./auth.service";
 
 export const register = [
-  preprocessRequest(registerDto, "body"),
+  applyRequestDto(registerDto, "body"),
   async (
     req: Request<null, null, RegisterDto>,
     res: Response
@@ -20,7 +20,7 @@ export const register = [
 ];
 
 export const login = [
-  preprocessRequest(loginDto, "body"),
+  applyRequestDto(loginDto, "body"),
   async (
     req: Request<null, null, LoginDto>,
     res: Response,

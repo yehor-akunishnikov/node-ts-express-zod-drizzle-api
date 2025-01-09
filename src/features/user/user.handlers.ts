@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import passport from "passport";
 
-import {preprocessRequest} from "@common/middlewares";
+import {applyRequestDto} from "@common/middlewares";
 import {transformOutput} from "@common/transformers";
 import {AuthRequest} from "@common/types";
 
@@ -17,7 +17,7 @@ import {
 } from "./user.schema";
 
 export const getAll = [
-  preprocessRequest(userSearchQueryDTO, "query"),
+  applyRequestDto(userSearchQueryDTO, "query"),
   async (
     req: Request<null, null, null, UserSearchQueryDTO>,
     res: Response
@@ -29,7 +29,7 @@ export const getAll = [
 ];
 
 export const getById = [
-  preprocessRequest(userIdUrlParamDto, "params"),
+  applyRequestDto(userIdUrlParamDto, "params"),
   async (
     req: Request<UserIdUrlParamDto>,
     res: Response
@@ -54,7 +54,7 @@ export const getMe = [
 
 export const updateMe = [
   passport.authenticate("jwt", {session: false}),
-  preprocessRequest(updateUserDTO, "body"),
+  applyRequestDto(updateUserDTO, "body"),
   async (
     req: AuthRequest<null, null, UpdateUserDTO>,
     res: Response

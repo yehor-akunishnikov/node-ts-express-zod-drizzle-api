@@ -4,7 +4,7 @@ import {Schema, ZodError} from "zod";
 
 import {HttpError} from "@common/errors";
 
-export const preprocessRequest = (
+export const applyRequestDto = (
   schema: Schema,
   key: keyof Pick<Request, "body" | "query" | "params">
 ): Handler => {
