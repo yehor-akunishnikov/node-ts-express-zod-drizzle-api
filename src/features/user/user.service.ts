@@ -1,3 +1,7 @@
+import {StatusCodes} from "http-status-codes";
+
+import {HttpError} from "@common/errors";
+
 import {UpdateUserDTO, User, UserSearchQueryDTO} from "./user.schema";
 import * as userRepo from "./user.repo";
 
@@ -10,7 +14,15 @@ export const findMany = async (
 export const findOne = async (
   query: Omit<UserSearchQueryDTO, "limit">
 ): Promise<User> => {
-  return userRepo.find({...query, limit: 1}).then(users => users[0]);
+  const user = await userRepo.find({...query, limit: 1}).then(
+    users => users[0]
+  );
+
+  if (!user) {
+    throw new HttpError(StatusCodes.NOT_FOUND, "User not found");
+  }
+
+  return user;
 };
 
 export const addOne = async (

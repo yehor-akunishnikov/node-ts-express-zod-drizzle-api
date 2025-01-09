@@ -11,11 +11,16 @@ export const register = [
   applyRequestDto(registerDto, "body"),
   async (
     req: Request<unknown, unknown, RegisterDto>,
-    res: Response
+    res: Response,
+    next: NextFunction
   ): Promise<void> => {
-    await authService.register(req.body);
+    try {
+      await authService.register(req.body);
 
-    res.status(StatusCodes.CREATED).json({message: "Successfully registered!"});
+      res.status(StatusCodes.CREATED).json({message: "Successfully registered!"});
+    } catch (e) {
+      next(e);
+    }
   }
 ];
 
@@ -26,12 +31,16 @@ export const login = [
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const {success, token, error} = await authService.login(req.body);
+    try {
+      const {success, token, error} = await authService.login(req.body);
 
-    if (success) {
-      res.status(StatusCodes.OK).json({token});
-    } else {
-      next(new HttpError(StatusCodes.UNAUTHORIZED, error!));
+      if (success) {
+        res.status(StatusCodes.OK).json({token});
+      } else {
+        next(new HttpError(StatusCodes.UNAUTHORIZED, error!));
+      }
+    } catch (e) {
+      next(e);
     }
   }
 ];
