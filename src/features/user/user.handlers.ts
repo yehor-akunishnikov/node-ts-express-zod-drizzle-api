@@ -19,7 +19,7 @@ import {
 export const getAll = [
   applyRequestDto(userSearchQueryDTO, "query"),
   async (
-    req: Request<null, null, null, UserSearchQueryDTO>,
+    req: Request<unknown, unknown, unknown, UserSearchQueryDTO>,
     res: Response
   ): Promise<void> => {
     const users = await userService.findMany(req.query);
@@ -56,7 +56,7 @@ export const updateMe = [
   passport.authenticate("jwt", {session: false}),
   applyRequestDto(updateUserDTO, "body"),
   async (
-    req: AuthRequest<null, null, UpdateUserDTO>,
+    req: AuthRequest<unknown, unknown, UpdateUserDTO>,
     res: Response
   ): Promise<void> => {
     const user = await userService.updateOne(

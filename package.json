@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc && tsc-alias -p tsconfig.json",
     "start": "node dist/index.js",
     "dev": "nodemon",
     "lint": "eslint",
@@ -28,7 +28,8 @@
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.19.0"
+    "typescript-eslint": "^8.19.0",
+    "tsc-alias": "^1.8.10"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
