@@ -8,7 +8,8 @@ export default [
   {
     ignores: [
       "dist",
-      "eslint.config.mjs"
+      "eslint.config.mjs",
+      "drizzle.config.ts"
     ]
   },
   {
@@ -32,7 +33,7 @@ export default [
   },
   {
     rules: {
-      "@stylistic/js/indent": ["error", "tab"],
+      "@stylistic/js/indent": ["error", 2],
       "@stylistic/js/semi": ["error"],
       "@stylistic/js/eol-last": ["error"],
       "@stylistic/js/quotes": ["error"],

@@ -5,19 +5,19 @@ import {Schema, ZodError} from "zod";
 import {HttpError} from "@common/errors";
 
 export const preprocessRequest = (
-	schema: Schema,
-	key: keyof Pick<Request, "body" | "query" | "params">
+  schema: Schema,
+  key: keyof Pick<Request, "body" | "query" | "params">
 ): Handler => {
-	return (req, res, next) => {
-		try {
-			req[key] = schema.parse(req[key]);
-			next();
-		} catch (e) {
-			if (e instanceof ZodError) {
-				next(new HttpError(StatusCodes.BAD_REQUEST, e.errors[0].message));
-			}
+  return (req, res, next) => {
+    try {
+      req[key] = schema.parse(req[key]);
+      next();
+    } catch (e) {
+      if (e instanceof ZodError) {
+        next(new HttpError(StatusCodes.BAD_REQUEST, e.errors[0].message));
+      }
 
-			next();
-		}
-	};
+      next();
+    }
+  };
 };
