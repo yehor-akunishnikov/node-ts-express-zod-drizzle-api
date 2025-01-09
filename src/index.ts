@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 import {StatusCodes} from "http-status-codes";
+import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";
 import passport from "passport";
 import express from "express";
@@ -11,7 +12,6 @@ import {configurePassport} from "@config/passport";
 import {HttpError} from "@common/errors";
 import {userRouter} from "@user-feature";
 import {authRouter} from "@auth-feature";
-import rateLimit from "express-rate-limit";
 
 const app = express();
 const port = process.env.PORT ?? 3000;
