@@ -10,7 +10,7 @@ import * as authService from "./auth.service";
 export const register = [
   preprocessRequest(registerDto, "body"),
   async (
-    req: Request<unknown, unknown, RegisterDto>,
+    req: Request<null, null, RegisterDto>,
     res: Response
   ): Promise<void> => {
     await authService.register(req.body);
@@ -22,7 +22,7 @@ export const register = [
 export const login = [
   preprocessRequest(loginDto, "body"),
   async (
-    req: Request<unknown, unknown, LoginDto>,
+    req: Request<null, null, LoginDto>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
