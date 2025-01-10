@@ -5,7 +5,7 @@ import {createFeature} from "./commands/create-feature";
 const program = new Command();
 
 program
-  .name("el-barto-cli")
+  .name("ebc")
   .description("Simple CLI utils set")
   .version("0.0.1");
 

@@ -10,7 +10,8 @@
     "lint:fix": "eslint --fix",
     "migrate": "npx drizzle-kit migrate",
     "migrate:generate": "npx drizzle-kit generate",
-    "migrate:push": "npx drizzle-kit push"
+    "migrate:push": "npx drizzle-kit push",
+    "ebc-create:feature": "ts-node src/cli/_index.ts create-feature"
   },
   "author": "",
   "license": "ISC",
