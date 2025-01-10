@@ -1,0 +1,26 @@
+import {int, mysqlTable, varchar} from "drizzle-orm/mysql-core";
+import {createSelectSchema} from "drizzle-zod";
+import {z} from "zod";
+
+import {toNumber} from "@common/transformers";
+
+export const %fNameP%Table = mysqlTable("%fNameP%_table", {
+  id: int().primaryKey().autoincrement(),
+  name: varchar({length: 255})
+});
+
+export const %fName%SearchQueryDTO = z.object({
+  id: z.string().transform(toNumber("Id should be a number")),
+  name: z.string(),
+  limit: z.string().transform(toNumber("Limit should be a number"))
+}).partial().strict("Invalid query");
+
+export const %fName%IdUrlParamDto = %fName%SearchQueryDTO.pick({id: true});
+
+export const %fName%OutputDTO = createSelectSchema(%fNameP%Table).transform(
+  ({name, id}) => ({name, id})
+);
+
+export type %fNameU% = typeof %fNameP%Table.$inferSelect;
+export type %fNameU%SearchQueryDTO = z.infer<typeof %fName%SearchQueryDTO>;
+export type %fNameU%IdUrlParamDto = z.infer<typeof %fName%IdUrlParamDto>;

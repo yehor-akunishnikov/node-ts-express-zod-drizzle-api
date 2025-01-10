@@ -1,0 +1,47 @@
+import {Request, Response, NextFunction} from "express";
+
+import {applyRequestDto} from "@common/middlewares";
+import {transformOutput} from "@common/transformers";
+
+import * as %fName%Service from "./%fName%.service";
+import {
+  %fNameU%IdUrlParamDto,
+  %fName%IdUrlParamDto,
+  %fName%OutputDTO,
+  %fName%SearchQueryDTO,
+  %fNameU%SearchQueryDTO
+} from "./%fName%.schema";
+
+export const getAll = [
+  applyRequestDto(%fName%SearchQueryDTO, "query"),
+  async (
+    req: Request<unknown, unknown, unknown, %fNameU%SearchQueryDTO>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const %fName%s = await %fName%Service.findMany(req.query);
+
+      res.json(transformOutput<%fNameU%SearchQueryDTO[]>(%fName%OutputDTO, %fName%s));
+    } catch (e) {
+      next(e);
+    }
+  }
+];
+
+export const getById = [
+  applyRequestDto(%fName%IdUrlParamDto, "params"),
+  async (
+    req: Request<%fNameU%IdUrlParamDto>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const %fName% = await %fName%Service.findOne({id: req.params.id});
+
+      res.json(transformOutput<%fNameU%SearchQueryDTO[]>(%fName%OutputDTO, %fName%));
+    } catch (e) {
+      next(e);
+    }
+  }
+];
