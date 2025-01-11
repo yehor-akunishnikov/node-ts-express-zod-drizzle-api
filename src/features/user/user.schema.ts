@@ -5,7 +5,7 @@ import {z} from "zod";
 import {passwordRegexp} from "@common/regexp-patterns";
 import {toNumber} from "@common/transformers";
 
-export const usersTable = mysqlTable("users_table", {
+export const usersTable = mysqlTable("users", {
   id: int().primaryKey().autoincrement(),
   name: varchar({length: 255}),
   email: varchar({length: 255}).notNull().unique(),

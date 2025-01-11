@@ -4,7 +4,7 @@ import {z} from "zod";
 
 import {toNumber} from "@common/transformers";
 
-export const %fNameP%Table = mysqlTable("%fNameP%_table", {
+export const %fNameP%Table = mysqlTable("%fNameP%", {
   id: int().primaryKey().autoincrement(),
   name: varchar({length: 255})
 });
