@@ -1,19 +1,20 @@
 import {Request, Response, NextFunction} from "express";
 
-import {applyRequestDto} from "@common/middlewares";
+import {applyRequestDTO} from "@common/middlewares";
 import {transformOutput} from "@common/transformers";
 
 import * as %fName%Service from "./%fName%.service";
 import {
-  %fNameU%IdUrlParamDto,
-  %fName%IdUrlParamDto,
+  %fNameU%IdUrlParamDTO,
+  %fName%IdUrlParamDTO,
   %fName%OutputDTO,
   %fName%SearchQueryDTO,
-  %fNameU%SearchQueryDTO
+  %fNameU%SearchQueryDTO,
+  %fNameU%OutputDTO
 } from "./%fName%.schema";
 
 export const getAll = [
-  applyRequestDto(%fName%SearchQueryDTO, "query"),
+  applyRequestDTO(%fName%SearchQueryDTO, "query"),
   async (
     req: Request<unknown, unknown, unknown, %fNameU%SearchQueryDTO>,
     res: Response,
@@ -22,7 +23,7 @@ export const getAll = [
     try {
       const %fName%s = await %fName%Service.findMany(req.query);
 
-      res.json(transformOutput<%fNameU%SearchQueryDTO[]>(%fName%OutputDTO, %fName%s));
+      res.json(transformOutput<%fNameU%OutputDTO[]>(%fName%OutputDTO, %fName%s));
     } catch (e) {
       next(e);
     }
@@ -30,16 +31,16 @@ export const getAll = [
 ];
 
 export const getById = [
-  applyRequestDto(%fName%IdUrlParamDto, "params"),
+  applyRequestDTO(%fName%IdUrlParamDTO, "params"),
   async (
-    req: Request<%fNameU%IdUrlParamDto>,
+    req: Request<%fNameU%IdUrlParamDTO>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
       const %fName% = await %fName%Service.findOne({id: req.params.id});
 
-      res.json(transformOutput<%fNameU%SearchQueryDTO[]>(%fName%OutputDTO, %fName%));
+      res.json(transformOutput<%fNameU%OutputDTO>(%fName%OutputDTO, %fName%));
     } catch (e) {
       next(e);
     }

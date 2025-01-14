@@ -121,7 +121,8 @@
 
       /* Feature modules */
       "@user-feature": ["./src/features/user/_index.ts"],
-      "@auth-feature": ["./src/features/auth/_index.ts"]
+      "@auth-feature": ["./src/features/auth/_index.ts"],
+      "@character-feature": ["./src/features/character/_index.ts"]
     }
   },
   "include": [

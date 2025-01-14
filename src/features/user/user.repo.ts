@@ -2,7 +2,7 @@ import {and, eq, SQL, sql} from "drizzle-orm";
 
 import {db} from "@config/db";
 
-import {UpdateUserDTO, User, UserSearchQueryDTO, usersTable} from "./user.schema";
+import {UpdateUserDTO, User, UserSearchQueryDTO, userTable} from "./user.schema";
 
 export const find = (
   queryParams: UserSearchQueryDTO
@@ -10,7 +10,7 @@ export const find = (
   const searchStatements: SQL[] = [];
 
   if (queryParams.id) {
-    searchStatements.push(eq(usersTable.id, queryParams.id));
+    searchStatements.push(eq(userTable.id, queryParams.id));
   }
   if (queryParams.email) {
     searchStatements.push(sql`email like
@@ -23,7 +23,7 @@ export const find = (
 
   return db
     .select()
-    .from(usersTable)
+    .from(userTable)
     .where(and(...searchStatements))
     .limit(queryParams.limit ?? 100);
 };
@@ -31,7 +31,7 @@ export const find = (
 export const addOne = async (
   payload: Pick<User, "email" | "password">
 ): Promise<void> => {
-  await db.insert(usersTable).values(payload);
+  await db.insert(userTable).values(payload);
 };
 
 export const update = async (
@@ -39,12 +39,12 @@ export const update = async (
   payload: UpdateUserDTO
 ): Promise<User> => {
   return db.transaction(async (tx) => {
-    await tx.update(usersTable).set(payload).where(eq(usersTable.id, id));
+    await tx.update(userTable).set(payload).where(eq(userTable.id, id));
 
     return tx
       .select()
-      .from(usersTable)
-      .where(eq(usersTable.id, id))
+      .from(userTable)
+      .where(eq(userTable.id, id))
       .limit(1)
       .then(users => users[0]);
   });

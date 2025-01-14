@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import passport from "passport";
 
-import {applyRequestDto} from "@common/middlewares";
+import {applyRequestDTO} from "@common/middlewares";
 import {transformOutput} from "@common/transformers";
 import {AuthRequest} from "@common/types";
 
@@ -9,15 +9,15 @@ import * as userService from "./user.service";
 import {
   UpdateUserDTO,
   updateUserDTO,
-  UserIdUrlParamDto,
-  userIdUrlParamDto,
+  UserIdUrlParamDTO,
+  userIdUrlParamDTO,
   userOutputDTO,
   userSearchQueryDTO,
-  UserSearchQueryDTO
+  UserSearchQueryDTO, UserOutputDTO
 } from "./user.schema";
 
 export const getAll = [
-  applyRequestDto(userSearchQueryDTO, "query"),
+  applyRequestDTO(userSearchQueryDTO, "query"),
   async (
     req: Request<unknown, unknown, unknown, UserSearchQueryDTO>,
     res: Response,
@@ -26,7 +26,7 @@ export const getAll = [
     try {
       const users = await userService.findMany(req.query);
 
-      res.json(transformOutput<UserSearchQueryDTO[]>(userOutputDTO, users));
+      res.json(transformOutput<UserOutputDTO[]>(userOutputDTO, users));
     } catch (e) {
       next(e);
     }
@@ -34,16 +34,16 @@ export const getAll = [
 ];
 
 export const getById = [
-  applyRequestDto(userIdUrlParamDto, "params"),
+  applyRequestDTO(userIdUrlParamDTO, "params"),
   async (
-    req: Request<UserIdUrlParamDto>,
+    req: Request<UserIdUrlParamDTO>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
       const user = await userService.findOne({id: req.params.id});
 
-      res.json(transformOutput<UserSearchQueryDTO[]>(userOutputDTO, user));
+      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
     } catch (e) {
       next(e);
     }
@@ -60,7 +60,7 @@ export const getMe = [
     try {
       const user = await userService.findOne({id: req.user.id});
 
-      res.json(transformOutput<UserSearchQueryDTO[]>(userOutputDTO, user));
+      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
     } catch (e) {
       next(e);
     }
@@ -69,7 +69,7 @@ export const getMe = [
 
 export const updateMe = [
   passport.authenticate("jwt", {session: false}),
-  applyRequestDto(updateUserDTO, "body"),
+  applyRequestDTO(updateUserDTO, "body"),
   async (
     req: AuthRequest<unknown, unknown, UpdateUserDTO>,
     res: Response,
@@ -81,7 +81,7 @@ export const updateMe = [
         req.body
       );
 
-      res.json(transformOutput<UserSearchQueryDTO[]>(userOutputDTO, user));
+      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
     } catch (e) {
       next(e);
     }

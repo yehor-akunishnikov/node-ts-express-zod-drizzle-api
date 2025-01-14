@@ -1,16 +1,16 @@
 import {NextFunction, Request, Response} from "express";
 import {StatusCodes} from "http-status-codes";
 
-import {applyRequestDto} from "@common/middlewares";
+import {applyRequestDTO} from "@common/middlewares";
 import {HttpError} from "@common/errors";
 
-import {LoginDto, loginDto, RegisterDto, registerDto} from "./auth.schema";
+import {LoginDTO, loginDTO, RegisterDTO, registerDTO} from "./auth.schema";
 import * as authService from "./auth.service";
 
 export const register = [
-  applyRequestDto(registerDto, "body"),
+  applyRequestDTO(registerDTO, "body"),
   async (
-    req: Request<unknown, unknown, RegisterDto>,
+    req: Request<unknown, unknown, RegisterDTO>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
@@ -25,9 +25,9 @@ export const register = [
 ];
 
 export const login = [
-  applyRequestDto(loginDto, "body"),
+  applyRequestDTO(loginDTO, "body"),
   async (
-    req: Request<unknown, unknown, LoginDto>,
+    req: Request<unknown, unknown, LoginDTO>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {

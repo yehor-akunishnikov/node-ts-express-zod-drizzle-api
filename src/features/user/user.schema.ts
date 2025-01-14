@@ -5,7 +5,7 @@ import {z} from "zod";
 import {passwordRegexp} from "@common/regexp-patterns";
 import {toNumber} from "@common/transformers";
 
-export const usersTable = mysqlTable("users", {
+export const userTable = mysqlTable("user", {
   id: int().primaryKey().autoincrement(),
   name: varchar({length: 255}),
   email: varchar({length: 255}).notNull().unique(),
@@ -28,13 +28,14 @@ export const updateUserDTO = z.object({
   )
 }).partial().strict("Invalid payload");
 
-export const userIdUrlParamDto = userSearchQueryDTO.pick({id: true});
+export const userIdUrlParamDTO = userSearchQueryDTO.pick({id: true});
 
-export const userOutputDTO = createSelectSchema(usersTable).transform(
+export const userOutputDTO = createSelectSchema(userTable).transform(
   ({name, id, email}) => ({name, id, email})
 );
 
-export type User = typeof usersTable.$inferSelect;
+export type User = typeof userTable.$inferSelect;
 export type UserSearchQueryDTO = z.infer<typeof userSearchQueryDTO>;
 export type UpdateUserDTO = z.infer<typeof updateUserDTO>;
-export type UserIdUrlParamDto = z.infer<typeof userIdUrlParamDto>;
+export type UserIdUrlParamDTO = z.infer<typeof userIdUrlParamDTO>;
+export type UserOutputDTO = z.infer<typeof userOutputDTO>;

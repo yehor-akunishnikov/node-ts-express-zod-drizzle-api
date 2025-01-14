@@ -4,7 +4,7 @@ import {z} from "zod";
 
 import {toNumber} from "@common/transformers";
 
-export const %fNameP%Table = mysqlTable("%fNameP%", {
+export const %fNameP%Table = mysqlTable("%fName%", {
   id: int().primaryKey().autoincrement(),
   name: varchar({length: 255})
 });
@@ -15,7 +15,7 @@ export const %fName%SearchQueryDTO = z.object({
   limit: z.string().transform(toNumber("Limit should be a number"))
 }).partial().strict("Invalid query");
 
-export const %fName%IdUrlParamDto = %fName%SearchQueryDTO.pick({id: true});
+export const %fName%IdUrlParamDTO = %fName%SearchQueryDTO.pick({id: true});
 
 export const %fName%OutputDTO = createSelectSchema(%fNameP%Table).transform(
   ({name, id}) => ({name, id})
@@ -23,4 +23,5 @@ export const %fName%OutputDTO = createSelectSchema(%fNameP%Table).transform(
 
 export type %fNameU% = typeof %fNameP%Table.$inferSelect;
 export type %fNameU%SearchQueryDTO = z.infer<typeof %fName%SearchQueryDTO>;
-export type %fNameU%IdUrlParamDto = z.infer<typeof %fName%IdUrlParamDto>;
+export type %fNameU%IdUrlParamDTO = z.infer<typeof %fName%IdUrlParamDTO>;
+export type %fNameU%OutputDTO = z.infer<typeof %fName%OutputDTO>;
