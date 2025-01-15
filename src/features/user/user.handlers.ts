@@ -5,21 +5,21 @@ import {applyRequestDTO} from "@common/middlewares";
 import {transformOutput} from "@common/transformers";
 import {AuthRequest} from "@common/types";
 
+import {UserOutputDTO, userOutputDTO} from "./schemas/output.schema";
 import * as userService from "./user.service";
 import {
-  UpdateUserDTO,
-  updateUserDTO,
-  UserIdUrlParamDTO,
-  userIdUrlParamDTO,
-  userOutputDTO,
+  ManyUsersSearchQueryDTO,
   userSearchQueryDTO,
-  UserSearchQueryDTO, UserOutputDTO
-} from "./user.schema";
+  userIdUrlParamDTO,
+  UserIdUrlParamDTO,
+  updateUserDTO,
+  UpdateUserDTO
+} from "./schemas/validation.schema";
 
 export const getAll = [
   applyRequestDTO(userSearchQueryDTO, "query"),
   async (
-    req: Request<unknown, unknown, unknown, UserSearchQueryDTO>,
+    req: Request<unknown, unknown, unknown, ManyUsersSearchQueryDTO>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {

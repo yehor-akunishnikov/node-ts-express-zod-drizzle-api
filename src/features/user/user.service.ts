@@ -1,22 +1,21 @@
 import {StatusCodes} from "http-status-codes";
 
 import {HttpError} from "@common/errors";
+import {Prisma} from "@prisma/client";
 
-import {UpdateUserDTO, User, UserSearchQueryDTO} from "./user.schema";
+import {ManyUsersSearchQueryDTO, OneUserSearchQueryDTO, UpdateUserDTO} from "./schemas/validation.schema";
 import * as userRepo from "./user.repo";
 
 export const findMany = async (
-  query: UserSearchQueryDTO
-): Promise<User[]> => {
-  return userRepo.find(query);
+  query: ManyUsersSearchQueryDTO
+) => {
+  return userRepo.findMany(query);
 };
 
 export const findOne = async (
-  query: Omit<UserSearchQueryDTO, "limit">
-): Promise<User> => {
-  const user = await userRepo.find({...query, limit: 1}).then(
-    users => users[0]
-  );
+  query: OneUserSearchQueryDTO
+) => {
+  const user = await userRepo.findOne(query);
 
   if (!user) {
     throw new HttpError(StatusCodes.NOT_FOUND, "User not found");
@@ -26,7 +25,7 @@ export const findOne = async (
 };
 
 export const addOne = async (
-  payload: Pick<User, "email" | "password">
+  payload: Pick<Prisma.userCreateInput, "email" | "password">
 ): Promise<void> => {
   return userRepo.addOne(payload);
 };
@@ -34,6 +33,6 @@ export const addOne = async (
 export const updateOne = async (
   id: number,
   payload: UpdateUserDTO
-): Promise<User> => {
+) => {
   return userRepo.update(id, payload);
 };

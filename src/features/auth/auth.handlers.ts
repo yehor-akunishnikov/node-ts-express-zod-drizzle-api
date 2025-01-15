@@ -4,7 +4,7 @@ import {StatusCodes} from "http-status-codes";
 import {applyRequestDTO} from "@common/middlewares";
 import {HttpError} from "@common/errors";
 
-import {LoginDTO, loginDTO, RegisterDTO, registerDTO} from "./auth.schema";
+import {registerDTO, RegisterDTO, loginDTO, LoginDTO} from "./schemas/validation.schema";
 import * as authService from "./auth.service";
 
 export const register = [

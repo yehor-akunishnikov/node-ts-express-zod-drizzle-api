@@ -1,3 +1,0 @@
-export * as %fName%Service from "./%fName%.service";
-export {%fName%Router} from "./%fName%.router";
-export {%fNameU%} from "./%fName%.schema";

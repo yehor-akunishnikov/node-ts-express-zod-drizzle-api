@@ -115,14 +115,14 @@
       "@common/middlewares": ["./src/common/middlewares/_index.ts"],
       "@common/types": ["./src/common/types/_index.d.ts"],
       "@common/errors": ["./src/common/errors/_index.ts"],
+      "@common/utils": ["./src/common/utils/_index.ts"],
 
       "@config/db": ["./src/config/db/_index.ts"],
       "@config/passport": ["./src/config/passport/_index.ts"],
 
       /* Feature modules */
       "@user-feature": ["./src/features/user/_index.ts"],
-      "@auth-feature": ["./src/features/auth/_index.ts"],
-      "@character-feature": ["./src/features/character/_index.ts"]
+      "@auth-feature": ["./src/features/auth/_index.ts"]
     }
   },
   "include": [

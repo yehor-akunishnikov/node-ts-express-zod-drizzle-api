@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 import {userService} from "@user-feature";
 
-import {LoginDTO, RegisterDTO} from "./auth.schema";
+import {RegisterDTO, LoginDTO} from "./schemas/validation.schema";
 
 export const register = async (registerDTO: RegisterDTO): Promise<void> => {
   const password = await bcrypt.hash(registerDTO.password, 10);

@@ -11,7 +11,7 @@ export const registerDTO = z.object({
 }).strict("Invalid payload");
 
 export const loginDTO = z.object({
-  email: z.string(),
+  email: z.string().email({message: "Invalid email"}),
   password: z.string()
 }).strict("Invalid payload");
 

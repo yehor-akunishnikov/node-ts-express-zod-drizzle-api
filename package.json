@@ -7,11 +7,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon",
     "lint": "eslint",
-    "lint:fix": "eslint --fix",
-    "migrate": "npx drizzle-kit migrate",
-    "migrate:generate": "npx drizzle-kit generate",
-    "migrate:push": "npx drizzle-kit push",
-    "ebc-create:feature": "ts-node src/cli/_index.ts create-feature"
+    "lint:fix": "eslint --fix"
   },
   "author": "",
   "license": "ISC",
@@ -34,11 +30,10 @@
     "typescript-eslint": "^8.19.0"
   },
   "dependencies": {
+    "@prisma/client": "^6.2.1",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.38.3",
-    "drizzle-zod": "^0.6.1",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
@@ -47,6 +42,7 @@
     "mysql2": "^3.12.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "prisma": "^6.2.1",
     "tsconfig-paths": "^4.2.0",
     "zod": "^3.24.1"
   }

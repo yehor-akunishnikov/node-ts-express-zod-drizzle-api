@@ -1,51 +1,42 @@
-import {and, eq, SQL, sql} from "drizzle-orm";
+import {Prisma} from "@prisma/client";
+import {prisma} from "@config/db";
 
-import {db} from "@config/db";
+import {ManyUsersSearchQueryDTO, UpdateUserDTO, OneUserSearchQueryDTO} from "./schemas/validation.schema";
 
-import {UpdateUserDTO, User, UserSearchQueryDTO, userTable} from "./user.schema";
+export const findMany = (
+  queryParams: ManyUsersSearchQueryDTO
+) => {
+  const {limit, ...restQuery} = queryParams;
 
-export const find = (
-  queryParams: UserSearchQueryDTO
-): Promise<User[]> => {
-  const searchStatements: SQL[] = [];
+  return prisma.user.findMany({
+    where: restQuery,
+    take: limit
+  });
+};
 
-  if (queryParams.id) {
-    searchStatements.push(eq(userTable.id, queryParams.id));
-  }
-  if (queryParams.email) {
-    searchStatements.push(sql`email like
-    ${`%${queryParams.email}%`}`);
-  }
-  if (queryParams.name) {
-    searchStatements.push(sql`name like
-    ${`%${queryParams.name}%`}`);
-  }
+export const findOne = (
+  queryParams: OneUserSearchQueryDTO
+) => {
 
-  return db
-    .select()
-    .from(userTable)
-    .where(and(...searchStatements))
-    .limit(queryParams.limit ?? 100);
+  return prisma.user.findFirst({
+    where: queryParams
+  });
 };
 
 export const addOne = async (
-  payload: Pick<User, "email" | "password">
-): Promise<void> => {
-  await db.insert(userTable).values(payload);
+  payload: Pick<Prisma.userCreateInput, "email" | "password">
+) => {
+  await prisma.user.create({
+    data: payload
+  });
 };
 
 export const update = async (
   id: number,
   payload: UpdateUserDTO
-): Promise<User> => {
-  return db.transaction(async (tx) => {
-    await tx.update(userTable).set(payload).where(eq(userTable.id, id));
-
-    return tx
-      .select()
-      .from(userTable)
-      .where(eq(userTable.id, id))
-      .limit(1)
-      .then(users => users[0]);
+) => {
+  return prisma.user.update({
+    where: {id},
+    data: payload
   });
 };
