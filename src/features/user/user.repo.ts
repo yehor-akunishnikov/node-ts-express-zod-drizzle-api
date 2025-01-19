@@ -1,7 +1,11 @@
 import {Prisma} from "@prisma/client";
 import {prisma} from "@config/db";
 
-import {ManyUsersSearchQueryDTO, UpdateUserDTO, OneUserSearchQueryDTO} from "./schemas/validation.schema";
+import {
+  ManyUsersSearchQueryDTO,
+  UpdateUserDTO,
+  OneUserSearchQueryDTO
+} from "./schemas/validation.schema";
 
 export const findMany = (
   queryParams: ManyUsersSearchQueryDTO
@@ -24,7 +28,7 @@ export const findOne = (
 };
 
 export const addOne = async (
-  payload: Pick<Prisma.userCreateInput, "email" | "password">
+  payload: Pick<Prisma.UserCreateInput, "email" | "password">
 ) => {
   await prisma.user.create({
     data: payload

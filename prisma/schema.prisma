@@ -7,9 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id       Int     @id @default(autoincrement())
+model User {
+  id Int @id @default(autoincrement())
+
   name     String?
   email    String
   password String
+
+  character Character[]
+}
+
+model Character {
+  id       Int  @id @default(autoincrement())
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  /// [CharacterBaseStats]
+  baseStats     Json
+  /// [CharacterHealthPoints]
+  healthPoints  Json
+  /// [CharacterPassiveSkills]
+  passiveSkills Json
+
+  specialties String
+  inventory   String
+  description String
+  state       CharacterState @default(DRAFT)
+}
+
+enum CharacterState {
+  DRAFT
+  PUBLISHED
+}
+
+model PassiveSkill {
+  name        String @unique
+
+  category    SkillCategory
+  description String
+}
+
+enum SkillCategory {
+  STRENGTH
+  DEXTERITY
+  INTELLECT
+  PERCEPTION
+  CHARISMA
 }

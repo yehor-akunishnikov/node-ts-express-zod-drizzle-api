@@ -1,11 +1,11 @@
-import {Schema} from "zod";
+import {z, Schema} from "zod";
 
-export const transformOutput = <T>(
-  schema: Schema,
+export const transformOutput = <S extends Schema>(
+  schema: S,
   output: unknown
-): T => {
+): z.infer<S> => {
   if (Array.isArray(output)) {
-    return output.map(outputItem => schema.parse(outputItem)) as T;
+    return output.map(outputItem => schema.parse(outputItem));
   } else {
     return schema.parse(output);
   }

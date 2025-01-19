@@ -122,7 +122,8 @@
 
       /* Feature modules */
       "@user-feature": ["./src/features/user/_index.ts"],
-      "@auth-feature": ["./src/features/auth/_index.ts"]
+      "@auth-feature": ["./src/features/auth/_index.ts"],
+      "@passive-skill-feature": ["./src/features/passive-skill/_index.ts"]
     }
   },
   "include": [

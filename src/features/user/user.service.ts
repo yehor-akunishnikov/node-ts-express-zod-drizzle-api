@@ -3,8 +3,12 @@ import {StatusCodes} from "http-status-codes";
 import {HttpError} from "@common/errors";
 import {Prisma} from "@prisma/client";
 
-import {ManyUsersSearchQueryDTO, OneUserSearchQueryDTO, UpdateUserDTO} from "./schemas/validation.schema";
 import * as userRepo from "./user.repo";
+import {
+  ManyUsersSearchQueryDTO,
+  OneUserSearchQueryDTO,
+  UpdateUserDTO
+} from "./schemas/validation.schema";
 
 export const findMany = async (
   query: ManyUsersSearchQueryDTO
@@ -25,7 +29,7 @@ export const findOne = async (
 };
 
 export const addOne = async (
-  payload: Pick<Prisma.userCreateInput, "email" | "password">
+  payload: Pick<Prisma.UserCreateInput, "email" | "password">
 ): Promise<void> => {
   return userRepo.addOne(payload);
 };

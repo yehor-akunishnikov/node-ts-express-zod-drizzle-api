@@ -1,0 +1,96 @@
+{
+  "STRENGTH": [
+    {
+      "name": "Athletics",
+      "description": "Physical exercises such as rock climbing"
+    },
+    {
+      "name": "Melee combat",
+      "description": "Hand-to-hand or weapon skills"
+    },
+    {
+      "name": "Endurance",
+      "description": "Resistance to fatigue, poison and environmental hazards, running and swimming"
+    },
+    {
+      "name": "Heavy lifting",
+      "description": "Ability to carry, move, or break heavy objects"
+    }
+  ],
+  "DEXTERITY": [
+    {
+      "name": "Stealth",
+      "description": "Ability to move silently and avoid detection"
+    },
+    {
+      "name": "Acrobatics",
+      "description": "Flexibility, tricks, ability to enter narrow passages"
+    },
+    {
+      "name": "Hand dexterity",
+      "description": "Picking locks, defusing traps and hand dexterity"
+    },
+    {
+      "name": "Ranged combat",
+      "description": "Proficiency with a bow, pistol, and throwing weapons"
+    }
+  ],
+  "INTELLECT": [
+    {
+      "name": "Investigating",
+      "description": "Finding clues and solving mysteries"
+    },
+    {
+      "name": "Knowledge",
+      "description": "Knowledge about the world and history"
+    },
+    {
+      "name": "Crafting",
+      "description": "Making things"
+    },
+    {
+      "name": "Medicine",
+      "description": "Healing wounds, treating diseases and understanding anatomy"
+    },
+    {
+      "name": "Mental toughness",
+      "description": "The ability to think clearly in difficult circumstances"
+    }
+  ],
+  "PERCEPTION": [
+    {
+      "name": "Awareness",
+      "description": "Spotting hidden details, traps and ambushes"
+    },
+    {
+      "name": "Insight",
+      "description": "Reading people's motives and detecting lies"
+    },
+    {
+      "name": "Survival",
+      "description": "Navigating and surviving in the wilderness"
+    },
+    {
+      "name": "Tracking",
+      "description": "Following footsteps and identifying hidden passages"
+    }
+  ],
+  "CHARISMA": [
+    {
+      "name": "Persuasion",
+      "description": "Convincing others to see your point of view"
+    },
+    {
+      "name": "Deception",
+      "description": "Lying and misleading others convincingly"
+    },
+    {
+      "name": "Intimidation",
+      "description": "Coercing others through fear or threats"
+    },
+    {
+      "name": "Performance",
+      "description": "Acting, singing, or any other performing arts"
+    }
+  ]
+}

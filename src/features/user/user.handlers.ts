@@ -5,7 +5,7 @@ import {applyRequestDTO} from "@common/middlewares";
 import {transformOutput} from "@common/transformers";
 import {AuthRequest} from "@common/types";
 
-import {UserOutputDTO, userOutputDTO} from "./schemas/output.schema";
+import {userOutputDTO} from "./schemas/output.schema";
 import * as userService from "./user.service";
 import {
   ManyUsersSearchQueryDTO,
@@ -26,7 +26,7 @@ export const getAll = [
     try {
       const users = await userService.findMany(req.query);
 
-      res.json(transformOutput<UserOutputDTO[]>(userOutputDTO, users));
+      res.json(transformOutput(userOutputDTO, users));
     } catch (e) {
       next(e);
     }
@@ -43,7 +43,7 @@ export const getById = [
     try {
       const user = await userService.findOne({id: req.params.id});
 
-      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
+      res.json(transformOutput(userOutputDTO, user));
     } catch (e) {
       next(e);
     }
@@ -60,7 +60,7 @@ export const getMe = [
     try {
       const user = await userService.findOne({id: req.user.id});
 
-      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
+      res.json(transformOutput(userOutputDTO, user));
     } catch (e) {
       next(e);
     }
@@ -81,7 +81,7 @@ export const updateMe = [
         req.body
       );
 
-      res.json(transformOutput<UserOutputDTO>(userOutputDTO, user));
+      res.json(transformOutput(userOutputDTO, user));
     } catch (e) {
       next(e);
     }
