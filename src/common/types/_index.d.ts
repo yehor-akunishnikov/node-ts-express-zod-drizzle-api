@@ -17,22 +17,3 @@ export interface AuthRequest<
 > {
   user: User;
 }
-
-declare global {
-  namespace PrismaJson {
-    type CharacterPassiveSkills = Record<number, number>;
-
-    interface CharacterBaseStats {
-      strength: number;
-      dexterity: number;
-      intellect: number;
-      perception: number;
-      charisma: number;
-    }
-
-    interface CharacterHealthPoints {
-      total: number;
-      current: number;
-    }
-  }
-}

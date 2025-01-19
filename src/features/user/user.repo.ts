@@ -7,7 +7,7 @@ import {
   OneUserSearchQueryDTO
 } from "./schemas/validation.schema";
 
-export const findMany = (
+export const findMany = async (
   queryParams: ManyUsersSearchQueryDTO
 ) => {
   const {limit, ...restQuery} = queryParams;
@@ -18,10 +18,9 @@ export const findMany = (
   });
 };
 
-export const findOne = (
+export const findOne = async (
   queryParams: OneUserSearchQueryDTO
 ) => {
-
   return prisma.user.findFirst({
     where: queryParams
   });

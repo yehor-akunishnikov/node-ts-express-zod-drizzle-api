@@ -1,4 +1,5 @@
 import {Request, Response, NextFunction} from "express";
+import {StatusCodes} from "http-status-codes";
 
 import {transformOutput} from "@common/transformers";
 
@@ -14,7 +15,7 @@ export const getAll = [
     try {
       const passiveSkills = await usersService.findMany();
 
-      res.status(200).json(transformOutput(passiveSkillOutputDTO, passiveSkills));
+      res.status(StatusCodes.OK).json(transformOutput(passiveSkillOutputDTO, passiveSkills));
     } catch (e) {
       next(e);
     }

@@ -22,13 +22,11 @@ model Character {
   author   User @relation(fields: [authorId], references: [id])
   authorId Int
 
-  /// [CharacterBaseStats]
   baseStats     Json
-  /// [CharacterHealthPoints]
   healthPoints  Json
-  /// [CharacterPassiveSkills]
   passiveSkills Json
 
+  name        String
   specialties String
   inventory   String
   description String
@@ -41,7 +39,7 @@ enum CharacterState {
 }
 
 model PassiveSkill {
-  name        String @unique
+  name String @unique
 
   category    SkillCategory
   description String

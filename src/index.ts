@@ -12,6 +12,7 @@ import {configurePassport} from "@config/passport";
 import {HttpError} from "@common/errors";
 
 import {passiveSkillRouter} from "@passive-skill-feature";
+import {characterRouter} from "@character-feature";
 import {userRouter} from "@user-feature";
 import {authRouter} from "@auth-feature";
 
@@ -32,6 +33,7 @@ configurePassport(passport);
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/passive-skills", passiveSkillRouter);
+app.use("/characters", characterRouter);
 app.use((_, res, next) => {
   next(new HttpError(StatusCodes.NOT_FOUND, "Error: Resource not found"));
 });
