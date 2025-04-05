@@ -1,8 +1,0 @@
-import express from "express";
-
-import * as handlers from "./%fName%.handlers";
-
-export const %fName%Router = express.Router({mergeParams: true});
-
-%fName%Router.get("/", ...handlers.getAll);
-%fName%Router.get("/:id", ...handlers.getById);

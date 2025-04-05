@@ -110,19 +110,18 @@
 
     /* Path aliases */
     "paths": {
-      "@common/regexp-patterns": ["./src/common/regexp-patterns/_index.ts"],
-      "@common/transformers": ["./src/common/transformers/_index.ts"],
-      "@common/middlewares": ["./src/common/middlewares/_index.ts"],
-      "@common/types": ["./src/common/types/_index.d.ts"],
-      "@common/errors": ["./src/common/errors/_index.ts"],
+      "@common/middlewares/*": ["./src/common/middlewares/*"],
+      "@common/regexp": ["./src/common/regexp.ts"],
+      "@common/types": ["./src/common/types.ts"],
+      "@common/errors": ["./src/common/errors.ts"],
+      "@common/utils/*": ["./src/common/utils/*"],
+      "@common/types/*": ["./src/common/types/*"],
 
-      "@config/db": ["./src/config/db/_index.ts"],
-      "@config/passport": ["./src/config/passport/_index.ts"],
+      "@config/*": ["./src/config/*"],
 
       /* Feature modules */
-      "@user-feature": ["./src/features/user/_index.ts"],
-      "@auth-feature": ["./src/features/auth/_index.ts"],
-      "@character-feature": ["./src/features/character/_index.ts"]
+      "@auth/*": ["./src/features/auth/*"],
+      "@user/*": ["./src/features/user/*"],
     }
   },
   "include": [
